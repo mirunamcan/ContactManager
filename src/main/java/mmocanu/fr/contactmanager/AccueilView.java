@@ -19,7 +19,6 @@ import mmocanu.fr.contactmanager.contact.ContactDTO;
 import mmocanu.fr.contactmanager.user.UserSession;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +34,7 @@ public class AccueilView {
 
 
     public Scene getScene() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/accueil-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/accueil-view.fxml")));
         return new Scene(root);
     }
 
@@ -88,14 +87,14 @@ public class AccueilView {
             private final Button seeButton = new Button("See");
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
-            private final HBox pane = new HBox(seeButton,editButton, deleteButton);
+            private final HBox pane = new HBox(seeButton, editButton, deleteButton);
 
             {
 
                 seeButton.setOnAction(event -> {
-                            // Get the current contact
-                            ContactDTO contact = getTableView().getItems().get(getIndex());
-                        });
+                    // Get the current contact
+                    ContactDTO contact = getTableView().getItems().get(getIndex());
+                });
                 // Set the actions for the buttons
                 editButton.setOnAction(event -> {
                     // Get the current contact
@@ -128,8 +127,6 @@ public class AccueilView {
         });
 
 
-
-
         contactTable.getColumns().setAll(nomColumn, prenomColumn, numeroColumn,/* mailColumn, adresseColumn, anniversaireColumn, noteColumn, */actionsColumn);
 
         ObservableList<ContactDTO> data = FXCollections.observableArrayList(contacts);
@@ -160,7 +157,6 @@ public class AccueilView {
             }
         });
     }
-
 
 
 }

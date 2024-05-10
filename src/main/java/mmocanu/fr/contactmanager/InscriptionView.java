@@ -4,18 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.util.Base64;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class InscriptionView {
     @FXML
@@ -59,6 +57,7 @@ public class InscriptionView {
             }
         });
     }
+
     private boolean validatePassword(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         if (!password.matches(regex)) {
@@ -67,8 +66,6 @@ public class InscriptionView {
         }
         return true;
     }
-
-
 
 
     private void registerUser(String username, String password) throws SQLException {
@@ -102,33 +99,33 @@ public class InscriptionView {
         }
     }
 
-public Scene getScene() throws Exception {
+    public Scene getScene() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/mmocanu/fr/contactmanager/views/inscription-view.fxml"));
         return new Scene(root);
-        }
+    }
 
-public void goToConnexion() {
+    public void goToConnexion() {
         try {
-        ConnexionView connexionView = new ConnexionView();
-        Scene connexionScene = connexionView.getScene();
-        Stage currentStage = (Stage) goToConnexion.getScene().getWindow();
-        currentStage.setScene(connexionScene);
+            ConnexionView connexionView = new ConnexionView();
+            Scene connexionScene = connexionView.getScene();
+            Stage currentStage = (Stage) goToConnexion.getScene().getWindow();
+            currentStage.setScene(connexionScene);
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
-        }
+    }
 
-private boolean validatePasswordMatch(String password, String confirmPassword) {
+    private boolean validatePasswordMatch(String password, String confirmPassword) {
         if (password == null || confirmPassword == null) {
-        showAlert("Invalid input", "Please enter a password");
-        return false;
+            showAlert("Invalid input", "Please enter a password");
+            return false;
         }
         if (!password.equals(confirmPassword)) {
-        showAlert("Invalid input", "Passwords do not match");
-        return false;
+            showAlert("Invalid input", "Passwords do not match");
+            return false;
         }
         return true;
-        }
+    }
 
     private String hashPassword(String password) {
         try {
@@ -140,11 +137,11 @@ private boolean validatePasswordMatch(String password, String confirmPassword) {
         }
     }
 
-private void showAlert(String title, String message) {
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-        }
-        }
+    }
+}

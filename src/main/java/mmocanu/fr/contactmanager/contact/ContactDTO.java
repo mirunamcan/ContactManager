@@ -17,7 +17,6 @@ public class ContactDTO {
     private String note;
 
 
-
     public ContactDTO(int id, String nom, String prenom, String numero, String mail, String adresse, Date anniversaire, String note) {
         this.id = id;
         this.nom = nom;
@@ -29,7 +28,6 @@ public class ContactDTO {
         this.note = note;
 
     }
-
 
 
     public String getNom() {
@@ -64,7 +62,7 @@ public class ContactDTO {
         return id;
     }
 
-public void setNom(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 

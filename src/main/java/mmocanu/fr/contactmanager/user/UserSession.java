@@ -1,7 +1,5 @@
 package mmocanu.fr.contactmanager.user;
 
-import mmocanu.fr.contactmanager.user.UserDTO;
-
 import java.util.prefs.Preferences;
 
 public class UserSession {
@@ -17,7 +15,7 @@ public class UserSession {
     }
 
     public static UserSession getInstance(UserDTO user) {
-        if(instance == null && user != null) {
+        if (instance == null && user != null) {
             instance = new UserSession(user);
         }
         return instance;

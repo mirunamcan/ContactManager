@@ -1,17 +1,15 @@
 package mmocanu.fr.contactmanager;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.fxml.FXML;
 import mmocanu.fr.contactmanager.user.UserDTO;
 import mmocanu.fr.contactmanager.user.UserSession;
 
 import java.sql.*;
-
-import static mmocanu.fr.contactmanager.PasswordVerifier.verifyPassword;
 
 public class ConnexionView {
     @FXML
@@ -31,6 +29,7 @@ public class ConnexionView {
     //  Database credentials
     static final String USER = "root";
     static final String PASS = "";
+
     @FXML
     public void initialize() {
         goToInscription.setOnAction(event -> {
@@ -66,7 +65,6 @@ public class ConnexionView {
             e.printStackTrace();
         }
     }
-
 
 
     private boolean validateUsername(String username) {
@@ -120,6 +118,7 @@ public class ConnexionView {
             if (conn != null) conn.close();
         }
     }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

@@ -1,83 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mmocanu.fr.contactmanager.AccueilView">
-   <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox prefHeight="145.0" prefWidth="600.0" style="-fx-background-color: #87a8d0;">
-               <children>
-                  <HBox prefHeight="134.0" prefWidth="600.0" style="-fx-background-color: #87a8d0;">
-                     <children>
-                        <ImageView fitHeight="124.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/annuaire%20(1).png" />
-                           </image>
-                        </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Manager" wrappingWidth="251.79962158203125">
-                           <font>
-                              <Font name="Baskerville Old Face" size="36.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets top="50.0" />
-                           </HBox.margin>
-                        </Text>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                           <children>
-                              <TextField text="search">
-                                 <HBox.margin>
-                                    <Insets left="40.0" top="60.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                           <HBox.margin>
-                              <Insets top="30.0" />
-                           </HBox.margin>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mmocanu.fr.contactmanager.AccueilView">
+    <children>
+        <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="145.0" prefWidth="600.0" style="-fx-background-color: #87a8d0;">
+                    <children>
+                        <HBox prefHeight="134.0" prefWidth="600.0" style="-fx-background-color: #87a8d0;">
+                            <children>
+                                <ImageView fitHeight="124.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../images/annuaire%20(1).png"/>
+                                    </image>
+                                </ImageView>
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Manager"
+                                      wrappingWidth="251.79962158203125">
+                                    <font>
+                                        <Font name="Baskerville Old Face" size="36.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="50.0"/>
+                                    </HBox.margin>
+                                </Text>
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                    <children>
+                                        <TextField text="search">
+                                            <HBox.margin>
+                                                <Insets left="40.0" top="60.0"/>
+                                            </HBox.margin>
+                                        </TextField>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets top="30.0"/>
+                                    </HBox.margin>
+                                </HBox>
+                                <Button fx:id="settingsBtn" focusTraversable="false" mnemonicParsing="false"
+                                        opacity="0.91" prefHeight="43.0" prefWidth="42.0" rotate="0.9"
+                                        style="-fx-background-radius: 100;">
+                                    <HBox.margin>
+                                        <Insets right="10.0" top="10.0"/>
+                                    </HBox.margin>
+                                    <graphic>
+                                        <ImageView fitHeight="46.0" fitWidth="30.0" pickOnBounds="true"
+                                                   preserveRatio="true" smooth="false"
+                                                   style="-fx-background-radius: 100;">
+                                            <image>
+                                                <Image url="@../../images/setting.png"/>
+                                            </image>
+                                            <effect>
+                                                <DropShadow/>
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
                         </HBox>
-                        <Button fx:id="settingsBtn" focusTraversable="false" mnemonicParsing="false" opacity="0.91" prefHeight="43.0" prefWidth="42.0" rotate="0.9" style="-fx-background-radius: 100;">
-                           <HBox.margin>
-                              <Insets right="10.0" top="10.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" smooth="false" style="-fx-background-radius: 100;">
-                                 <image>
-                                    <Image url="@../../images/setting.png" />
-                                 </image>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </ImageView>
-                           </graphic>
+                        <Button id="green" fx:id="AddContactBtn" mnemonicParsing="false" prefHeight="28.0"
+                                prefWidth="29.0" stylesheets="@../../stylesheet.css" text="+">
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="560.0" right="10.0"/>
+                            </VBox.margin>
                         </Button>
-                     </children>
-                  </HBox>
-                  <Button id="green" fx:id="AddContactBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="29.0" stylesheets="@../../stylesheet.css" text="+">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="560.0" right="10.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-            <TableView fx:id="contactTable" prefHeight="250.0" prefWidth="550.0">
-              <columns>
-                <TableColumn prefWidth="296.0" text="nom" />
-                  <TableColumn prefWidth="304.00006103515625" text="actions" />
-              </columns>
-            </TableView>
-         </children>
-      </VBox>
-   </children>
+                    </children>
+                </VBox>
+                <TableView fx:id="contactTable" prefHeight="250.0" prefWidth="550.0">
+                    <columns>
+                        <TableColumn prefWidth="296.0" text="nom"/>
+                        <TableColumn prefWidth="304.00006103515625" text="actions"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
