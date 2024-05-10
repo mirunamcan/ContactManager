@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
+import mmocanu.fr.contactmanager.user.UserDTO;
+import mmocanu.fr.contactmanager.user.UserSession;
+
 import java.sql.*;
 
 import static mmocanu.fr.contactmanager.PasswordVerifier.verifyPassword;
@@ -90,7 +93,7 @@ public class ConnexionView {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.prepareStatement("SELECT password FROM users WHERE username = ?");
+            stmt = conn.prepareStatement("SELECT id, username, password FROM users WHERE username = ?");
             stmt.setString(1, username);
 
             ResultSet rs = stmt.executeQuery();
@@ -98,22 +101,23 @@ public class ConnexionView {
                 String storedPasswordHash = rs.getString("password");
 
                 if (PasswordVerifier.verifyPassword(password, storedPasswordHash)) {
-                    showAlert("Success", "You are now logged in");
+                    UserDTO user = new UserDTO(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
+                    UserSession.getInstance(user);
+                    AccueilView accueilView = new AccueilView();
+                    Scene accueilScene = accueilView.getScene();
+                    Stage currentStage = (Stage) submitButton.getScene().getWindow();
+                    currentStage.setScene(accueilScene);
                 } else {
-                    showAlert("Error", "Invalid username or password");
+                    showAlert("Invalid credentials", "The username or password is incorrect");
                 }
             } else {
-                showAlert("Error", "Invalid username or password");
+                showAlert("Invalid credentials", "The username or password is incorrect");
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         }
     }
     private void showAlert(String title, String message) {

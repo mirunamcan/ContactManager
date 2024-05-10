@@ -48,6 +48,10 @@ public class InscriptionView {
                     try {
                         String hashedPassword = hashPassword(password);
                         registerUser(username, hashedPassword);
+                        AccueilView accueilView = new AccueilView();
+                        Scene accueilScene = accueilView.getScene();
+                        Stage currentStage = (Stage) enregistrerBtn.getScene().getWindow();
+                        currentStage.setScene(accueilScene);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
