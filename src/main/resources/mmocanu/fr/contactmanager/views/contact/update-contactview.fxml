@@ -6,8 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="mmocanu.fr.contactmanager.CreateContactview">
+            fx:controller="mmocanu.fr.contactmanager.contact.UpdateContactView">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="203.2" prefHeight="423.0" prefWidth="397.0" spacing="20.0"
               style="-fx-background-color: #deecfc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="203.0"
@@ -21,40 +22,40 @@
                 <HBox alignment="CENTER" prefHeight="23.0" prefWidth="362.0" spacing="30.0">
                     <children>
                         <Label text="Prenom"/>
-                        <TextField/>
+                       <TextField fx:id="prenomField"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="26.0" prefWidth="362.0" spacing="50.0">
                     <children>
                         <Label text="Nom"/>
-                        <TextField/>
+                        <TextField  fx:id="nomField"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="25.0" prefWidth="362.0" spacing="10.0">
                     <children>
                         <Label text="Anniversaire"/>
-                        <DatePicker prefHeight="26.0" prefWidth="150.0"/>
+                        <DatePicker fx:id="anniversaireField" prefHeight="26.0" prefWidth="150.0"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="26.0" prefWidth="362.0" spacing="32.0">
                     <children>
                         <Label text="Numero"/>
-                        <TextField/>
+                        <TextField fx:id="numeroField"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="25.0" prefWidth="362.0" spacing="34.0">
                     <children>
                         <Label text="Adresse"/>
-                        <TextField/>
+                        <TextField fx:id="adresseField"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="26.0" prefWidth="362.0" spacing="50.0">
                     <children>
                         <Label text="Note"/>
-                        <TextArea prefHeight="39.0" prefWidth="150.0"/>
+                        <TextArea fx:id="noteField" prefWidth="150.0"/>
                     </children>
                 </HBox>
-                <Button id="glass" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="91.0"
+                <Button fx:id="enregistrerBtn" id="glass" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="91.0"
                         stylesheets="@../../stylesheet.css" text="Enregistrer" textAlignment="CENTER">
                     <VBox.margin>
                         <Insets bottom="20.0"/>

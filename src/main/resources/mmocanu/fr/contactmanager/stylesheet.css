@@ -514,3 +514,35 @@
     -fx-text-fill: #311c09;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.1), 2, 0.0, 0, 1);
 }
+
+.digit-button {
+    -fx-background-color: #87a0d8;
+}
+
+.digit-button:hover {
+    -fx-border-color: #ff69b4;
+    -fx-border-width: 2px;
+}
+
+.remove-button {
+    -fx-background-color: #ff69b4;
+}
+
+.remove-button:hover {
+    -fx-border-color: #87a0d8;
+    -fx-border-width: 2px;
+}
+
+.ok-button {
+    -fx-background-color: #ff69b4;
+}
+
+.ok-button:hover {
+    -fx-border-color: #87a0d8;
+    -fx-border-width: 2px;
+}
+
+.button:pressed {
+    -fx-border-color: #00FF00;
+    -fx-border-width: 2px;
+}

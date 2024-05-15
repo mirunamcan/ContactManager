@@ -2,6 +2,7 @@ package mmocanu.fr.contactmanager.contact;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class ContactDTO {
 
@@ -50,8 +51,8 @@ public class ContactDTO {
         return adresse;
     }
 
-    public Date getAnniversaire() {
-        return anniversaire;
+    public LocalDate getAnniversaire() {
+        return anniversaire != null ? anniversaire.toLocalDate() : null;
     }
 
     public String getNote() {

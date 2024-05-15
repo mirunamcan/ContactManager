@@ -6,31 +6,40 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mmocanu.fr.contactmanager.contact.ContactDAO;
-import mmocanu.fr.contactmanager.contact.ContactDTO;
+
+import mmocanu.fr.contactmanager.contact.*;
 import mmocanu.fr.contactmanager.user.UserSession;
+import mmocanu.fr.contactmanager.DigitKeyboardDialogController;
+
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class AccueilView {
     @FXML
-    public TableView<ContactDTO> contactTable;
+    private TableView<ContactDTO> contactTable;
 
     @FXML
     public Button settingsBtn;
 
     @FXML
     public Button AddContactBtn;
+
+    @FXML
+    private TextField numeroField;
+
+
+
+
+    private ShowContactView showContactView;
+    private ObservableList<ContactDTO> contacts;
 
 
     public Scene getScene() throws IOException {
@@ -40,6 +49,14 @@ public class AccueilView {
 
     @FXML
     public void initialize() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/showContact-view.fxml"));
+        Parent rootShowContact = loader.load();
+        showContactView = loader.getController();
+        contactTable.setItems(contacts);
+
+        AccueilView accueilView = this;
+
+
         ContactDAO contactDAO = new ContactDAO();
         int userId = UserSession.getInstance(null).getUser().getId();
         List<ContactDTO> contacts = contactDAO.getAllContacts(userId);
@@ -58,56 +75,80 @@ public class AccueilView {
         numeroColumn.setCellValueFactory(new PropertyValueFactory<>("numero"));
         numeroColumn.setResizable(false);
         numeroColumn.setPrefWidth(100);
-//        TableColumn<ContactDTO, String> mailColumn = new TableColumn<>("Mail");
-//        mailColumn.setCellValueFactory(new PropertyValueFactory<>("mail"));
-//        mailColumn.setResizable(false);
-//        mailColumn.setPrefWidth(100);
-
-       /* TableColumn<ContactDTO, String> adresseColumn = new TableColumn<>("Adresse");
-        adresseColumn.setCellValueFactory(new PropertyValueFactory<>("adresse"));
-        adresseColumn.setResizable(false);
-        adresseColumn.setPrefWidth(100);
-
-        TableColumn<ContactDTO, Date> anniversaireColumn = new TableColumn<>("Anniversaire");
-        anniversaireColumn.setCellValueFactory(new PropertyValueFactory<>("anniversaire"));
-        anniversaireColumn.setResizable(false);
-        anniversaireColumn.setPrefWidth(100);
-
-        TableColumn<ContactDTO, String> noteColumn = new TableColumn<>("Note");
-        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
-        noteColumn.setResizable(false);
-        noteColumn.setPrefWidth(100);*/
 
         TableColumn<ContactDTO, Void> actionsColumn = new TableColumn<>("Actions");
         actionsColumn.setResizable(false);
         actionsColumn.setPrefWidth(200);
         // Set the cell factory to create cells containing the buttons
         actionsColumn.setCellFactory(param -> new TableCell<>() {
-
             private final Button seeButton = new Button("See");
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
             private final HBox pane = new HBox(seeButton, editButton, deleteButton);
 
-            {
 
+            {
                 seeButton.setOnAction(event -> {
                     // Get the current contact
                     ContactDTO contact = getTableView().getItems().get(getIndex());
+
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/showContact-view.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setTitle("Show Contact");
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    } catch (IOException e) {
+                        // Handle the exception (e.g., show an error message to the user)
+                        e.printStackTrace();
+                    }
                 });
-                // Set the actions for the buttons
                 editButton.setOnAction(event -> {
                     // Get the current contact
                     ContactDTO contact = getTableView().getItems().get(getIndex());
-                    // TODO: Implement your edit action here
+
+                    try {
+                        FXMLLoader updateLoader = new FXMLLoader();
+                        updateLoader.setLocation(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/update-contactview.fxml"));
+                        updateLoader.setControllerFactory(c -> new UpdateContactView(accueilView, showContactView)); // Use the AccueilView reference here
+                        Parent rootUpdateContact = updateLoader.load();
+
+                        UpdateContactView updateContactView = updateLoader.getController();
+                        updateContactView.setContactToUpdate(contact);
+                        updateContactView.setAccueilView(AccueilView.this);
+
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setTitle("Update Contact");
+                        stage.setScene(new Scene(rootUpdateContact));
+
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 });
+
 
                 deleteButton.setOnAction(event -> {
                     // Get the current contact
                     ContactDTO contact = getTableView().getItems().get(getIndex());
-                    // TODO: Implement your delete action here
-                });
 
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation Dialog");
+                    alert.setHeaderText("Delete Contact");
+                    alert.setContentText("Are you sure you want to delete this contact?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        // User chose OK, delete the contact
+                        contactDAO.deleteContact(contact.getId()); // Delete the contact from the database
+                        getTableView().getItems().remove(contact); // Remove the contact from the table view
+                    } else {
+                        // User chose CANCEL or closed the dialog
+                    }
+                });
                 // Set the style for the buttons
                 seeButton.getStyleClass().add("see-button");
                 editButton.getStyleClass().add("edit-button");
@@ -127,7 +168,7 @@ public class AccueilView {
         });
 
 
-        contactTable.getColumns().setAll(nomColumn, prenomColumn, numeroColumn,/* mailColumn, adresseColumn, anniversaireColumn, noteColumn, */actionsColumn);
+        contactTable.getColumns().setAll(nomColumn, prenomColumn, numeroColumn, actionsColumn);
 
         ObservableList<ContactDTO> data = FXCollections.observableArrayList(contacts);
         contactTable.setItems(data);
@@ -147,6 +188,8 @@ public class AccueilView {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mmocanu/fr/contactmanager/views/contact/create-contactview.fxml"));
                 Parent root = fxmlLoader.load();
+                CreateContactView controller = fxmlLoader.getController();
+                controller.setAccueilView(this);
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL); // Optional: makes the new window modal
                 stage.setTitle("Create Contact");
@@ -158,5 +201,9 @@ public class AccueilView {
         });
     }
 
+    public void updateContact(ContactDTO contactToUpdate) {
+        // Update the contact here...
+    }
 
 }
+

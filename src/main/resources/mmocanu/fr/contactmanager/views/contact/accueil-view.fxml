@@ -34,7 +34,7 @@
                                 </Text>
                                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                     <children>
-                                        <TextField text="search">
+                                        <TextField fx:id="search" text="search">
                                             <HBox.margin>
                                                 <Insets left="40.0" top="60.0"/>
                                             </HBox.margin>

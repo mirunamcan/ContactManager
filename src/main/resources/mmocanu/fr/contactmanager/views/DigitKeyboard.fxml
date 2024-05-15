@@ -1,0 +1,43 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<GridPane fx:controller="mmocanu.fr.contactmanager.DigitKeyboardDialogController"
+          xmlns:fx="http://javafx.com/fxml"
+          alignment="center" hgap="5" vgap="5" style="-fx-background-color: #deecfc; -fx-padding: 10;"
+          prefWidth="300" prefHeight="200">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="4" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="4" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="4" />
+    </columnConstraints>
+
+    <Button text="1" onAction="#onDigitButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="digit-button"/>
+    <Button text="2" onAction="#onDigitButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="digit-button"/>
+    <Button text="3" onAction="#onDigitButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="digit-button"/>
+
+    <Button text="4" onAction="#onDigitButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="digit-button"/>
+    <Button text="5" onAction="#onDigitButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="digit-button"/>
+    <Button text="6" onAction="#onDigitButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="digit-button"/>
+
+    <Button text="7" onAction="#onDigitButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="digit-button"/>
+    <Button text="8" onAction="#onDigitButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="digit-button"/>
+    <Button text="9" onAction="#onDigitButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="digit-button"/>
+
+    <Button text="*" onAction="#onDigitButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="digit-button"/>
+    <Button text="0" onAction="#onDigitButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="digit-button"/>
+    <Button text="#" onAction="#onDigitButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="digit-button"/>
+
+    <Button text="+" onAction="#onDigitButtonClicked" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="digit-button"/>
+    <Button text="OK" onAction="#onOkButtonClicked" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="ok-button"/>
+    <Button onAction="#onRemoveButtonClicked" GridPane.columnIndex="2" GridPane.rowIndex="4" styleClass="remove-button">
+        <graphic>
+            <ImageView fitHeight="20" fitWidth="20">
+                <image>
+                    <Image url="@../images/erase.jpg" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+</GridPane>
