@@ -52,6 +52,27 @@ public class UserDAO {
         return user;
     }
 
+    public String getHashedPassword(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        UserDTO user = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.prepareStatement("SELECT password FROM users WHERE id = ?");
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("password");
+            }
+        } finally {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        }
+        return "";
+    }
+
     public void UpdateUserPwd(String hashedPassword) throws SQLException {
 
         PreparedStatement stmt = null;

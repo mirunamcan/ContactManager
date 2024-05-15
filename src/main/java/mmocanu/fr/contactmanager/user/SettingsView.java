@@ -28,11 +28,12 @@ public class SettingsView {
     @FXML
     public Button ValiderBtn;
     @FXML
-    public TextField MdpField;
+    public PasswordField MdpField;
     @FXML
-    public TextField MdpConfirmField;
+    public PasswordField MdpConfirmField;
     @FXML
     public Button backButton;
+    public PasswordField ValidateOldPassword;
     @FXML
     private Button logoutButton;
 
@@ -54,9 +55,17 @@ public class SettingsView {
         ValiderBtn.setOnAction(event -> {
                     String password = MdpField.getText();
                     String confirmPassword = MdpConfirmField.getText();
-
+                    String validate = ValidateOldPassword.getText();
                     if (validatePasswordMatch(password, confirmPassword)) {
                         if (validatePassword(password)) {
+                            try {
+                                if (!validateOldPassword(validate)) {
+                                    showAlert("Invalid input", "L'ancien mot de passe est incorrect.");
+                                    return;
+                                }
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
                             try {
                                 String hashedPassword = hashPassword(password);
                                 UserDAO userDAO = new UserDAO();
@@ -65,6 +74,7 @@ public class SettingsView {
                                 Scene accueilScene = accueilView.getScene();
                                 Stage currentStage = (Stage) ValiderBtn.getScene().getWindow();
                                 currentStage.setScene(accueilScene);
+                                showAlert("Success", "Password updated successfully");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -93,19 +103,16 @@ public class SettingsView {
             }
         });*/
 
+    public boolean validateOldPassword(String oldPassword) throws SQLException {
+        // Hash the old password
+        String hashedOldPassword = hashPassword(oldPassword);
 
-    private void openSettings() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mmocanu/fr/contactmanager/views/settings-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Settings");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Get the stored hashed password
+        UserDAO UserDAO = new UserDAO();
+        String storedPassword = UserDAO.getHashedPassword(UserSession.getSavedUserId());
+
+        // Compare the hashed old password with the stored password
+        return hashedOldPassword.equals(storedPassword);
     }
 
     private void logout() {

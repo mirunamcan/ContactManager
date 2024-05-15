@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mmocanu.fr.contactmanager.user.SettingsView">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: deecfc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -41,20 +42,18 @@
                     </children>
                 </HBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                    <children>
-                        <TextField fx:id="MdpField" promptText="nouveau mot de passe" />
-                        <TextField fx:id="MdpConfirmField" promptText="saisir votre ancien mot de passe" />
-                  <TextField fx:id="MdpConfirmField1" promptText="confirmer ancien mot de passe" />
-                  <HBox alignment="CENTER" spacing="10.0">
-                     <children>
-                        <Button id="glass" fx:id="backButton" mnemonicParsing="false" stylesheets="@../stylesheet.css" text="retour" />
-                              <Button id="glass" fx:id="ValiderBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" stylesheets="@../stylesheet.css" text="valider" />
-                     </children>
-                  </HBox>
-                    </children>
                     <padding>
-                        <Insets left="150.0" right="150.0" top="20.0" />
+                        <Insets left="150.0" right="150.0" top="20.0"/>
                     </padding>
+                    <PasswordField fx:id="ValidateOldPassword" promptText="Saisir votre ancien mot de passe"/>
+                    <PasswordField fx:id="MdpField" promptText="Nouveau mot de passe"/>
+                    <PasswordField fx:id="MdpConfirmField" promptText="Confirmer ancien mot de passe"/>
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <Button id="glass" fx:id="backButton" mnemonicParsing="false"
+                                stylesheets="@../stylesheet.css" text="retour"/>
+                        <Button id="glass" fx:id="ValiderBtn" alignment="CENTER" contentDisplay="CENTER"
+                                mnemonicParsing="false" stylesheets="@../stylesheet.css" text="valider"/>
+                    </HBox>
                 </VBox>
             </children>
         </VBox>
