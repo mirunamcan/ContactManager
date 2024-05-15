@@ -29,18 +29,9 @@ permettant aux utilisateurs de stocker, afficher et gérer leurs contacts en tou
 6. Compilez et exécutez l'application à partir de votre IDE.
 7. Utilisez l'application pour gérer vos contacts !
 
-## Captures d'Écran
+## Autrice
 
-![Capture d'Écran 1](lien_vers_la_capture_d_ecran_1.png)
-*Interface principale de Contact Manager*
-
-![Capture d'Écran 2](lien_vers_la_capture_d_ecran_2.png)
-*Ajout d'un nouveau contact*
-
-## Contributeurs
-
-- [Votre Nom](lien_vers_votre_profil_github)
-- [Autre Contributeur](lien_vers_leur_profil_github)
+- [Miruna Mocanu](https://github.com/mirunamcan)
 
 ## Licence
 
