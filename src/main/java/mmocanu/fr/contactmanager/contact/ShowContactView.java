@@ -1,53 +1,77 @@
 package mmocanu.fr.contactmanager.contact;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import mmocanu.fr.contactmanager.AccueilView;
 import mmocanu.fr.contactmanager.contact.ContactDTO;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class ShowContactView {
 
     @FXML
-    private Label prenomLabel;
+    private TextField prenom;
 
     @FXML
-    private Label nomLabel;
+    private TextField nom;
 
     @FXML
-    private Label anniversaireLabel;
+    private DatePicker anniversaire;
 
     @FXML
-    private Label numeroLabel;
+    private TextField numero;
 
     @FXML
-    private Label adresseLabel;
+    private TextField adresse;
 
     @FXML
-    private Label noteLabel;
+    private TextArea note;
 
-    // ...
+    private ContactDTO contactToSee;
 
-    public void updateContact(ContactDTO updatedContact) {
-        // Update the labels with the updated contact data
-        if (prenomLabel != null) {
-            prenomLabel.setText(updatedContact.getPrenom());
-        }
+    private AccueilView accueilView;
 
-        if (nomLabel != null) {
-            nomLabel.setText(updatedContact.getNom());
-        }
-        if (anniversaireLabel != null) {
-            anniversaireLabel.setText(updatedContact.getAnniversaire().toString());
+    @FXML
+    public void initialize() {
+        if (prenom != null) {
+            prenom.setText(contactToSee.getPrenom());
         }
 
-        if (numeroLabel != null) {
-            numeroLabel.setText(updatedContact.getNumero());
+        if (nom != null) {
+            nom.setText(contactToSee.getNom());
         }
-        if (adresseLabel != null) {
-            adresseLabel.setText(updatedContact.getAdresse());
+        if (anniversaire != null && contactToSee != null && contactToSee.getAnniversaire() != null) {
+            Date date = Date.valueOf(contactToSee.getAnniversaire());
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            anniversaire.setValue(localDate);
         }
-        if (noteLabel != null){
-            noteLabel.setText(updatedContact.getNote());
+
+        if (numero != null) {
+            numero.setText(contactToSee.getNumero());
         }
+        if (adresse != null) {
+            adresse.setText(contactToSee.getAdresse());
+        }
+        if (note != null){
+            note.setText(contactToSee.getNote());
+        }
+    }
+    public ShowContactView(AccueilView accueilView, ContactDTO contact) {
+        this.accueilView = accueilView;
+        this.contactToSee = contact;
+    }
+
+
+    public void setContactToShow(ContactDTO contact) {
+        System.out.println("contactToSee: " + contact.getNom() + " " + contact.getPrenom());
+        this.contactToSee = contact;
+        System.out.println("contactToSee: " + contactToSee.getNom() + " " + contactToSee.getPrenom());
+
     }
 
     // ...

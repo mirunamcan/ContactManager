@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="mmocanu.fr.contactmanager.user.SettingsView">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mmocanu.fr.contactmanager.user.SettingsView">
     <children>
-        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: deecfc;" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: deecfc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <HBox prefHeight="126.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: c3b4d2;">
                     <children>
                         <ImageView fitHeight="96.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../images/kitty.png"/>
+                                <Image url="@../images/kitty.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres"
-                              textAlignment="CENTER">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres" textAlignment="CENTER">
                             <font>
-                                <Font name="Baskerville Old Face" size="33.0"/>
+                                <Font name="Baskerville Old Face" size="33.0" />
                             </font>
                             <HBox.margin>
-                                <Insets top="30.0"/>
+                                <Insets top="30.0" />
                             </HBox.margin>
                         </Text>
-                        <Button id="glass" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0"
-                                stylesheets="@../stylesheet.css" text="se déconnecter">
+                        <Button id="glass" fx:id="logoutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" stylesheets="@../stylesheet.css" text="se déconnecter">
                             <font>
-                                <Font name="Baskerville Old Face" size="16.0"/>
+                                <Font name="Baskerville Old Face" size="16.0" />
                             </font>
                             <HBox.margin>
-                                <Insets left="150.0" top="15.0"/>
+                                <Insets left="150.0" top="15.0" />
                             </HBox.margin>
                         </Button>
                     </children>
                 </HBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                     <children>
-                        <TextField text="modifier identifiant"/>
-                        <TextField text="modifier mot de passe"/>
-                        <TextField text="confimer mot de passe"/>
-                        <Button id="glass" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                                stylesheets="@../stylesheet.css" text="valider">
-                            <VBox.margin>
-                                <Insets/>
-                            </VBox.margin>
-                        </Button>
+                        <TextField fx:id="MdpField" promptText="nouveau mot de passe" />
+                        <TextField fx:id="MdpConfirmField" promptText="saisir votre ancien mot de passe" />
+                  <TextField fx:id="MdpConfirmField1" promptText="confirmer ancien mot de passe" />
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button id="glass" fx:id="backButton" mnemonicParsing="false" stylesheets="@../stylesheet.css" text="retour" />
+                              <Button id="glass" fx:id="ValiderBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" stylesheets="@../stylesheet.css" text="valider" />
+                     </children>
+                  </HBox>
                     </children>
                     <padding>
-                        <Insets left="150.0" right="150.0" top="20.0"/>
+                        <Insets left="150.0" right="150.0" top="20.0" />
                     </padding>
                 </VBox>
             </children>

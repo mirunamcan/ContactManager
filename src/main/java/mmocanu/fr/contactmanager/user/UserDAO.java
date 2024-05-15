@@ -51,4 +51,32 @@ public class UserDAO {
 
         return user;
     }
+
+    public void UpdateUserPwd(String hashedPassword) throws SQLException {
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.prepareStatement("UPDATE users SET password = ? WHERE id = ?");
+            stmt.setString(1, hashedPassword);
+            stmt.setInt(2, UserSession.getSavedUserId());
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted == 1) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
 }
